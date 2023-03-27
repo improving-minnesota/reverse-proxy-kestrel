@@ -26,17 +26,22 @@ however, there are still reasons you may want to use Kestrel behind a reverse pr
 4. SSL termination
 5. Insights and logging
 6. Simplify deployment
-7. Stuck having to use older version of .Net core (hence older version of Kestrel, which bad rhetoric applies to)
+7. Stuck having to use [older version](https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#supported-distributions) of .Net core (hence older version of Kestrel, which bad rhetoric applies to)
 
 ## Some features lacking in Kestrel that you (might) run into
 
 - Doesn't have robust Mime-Type mapping.
 - Request Filtering (e.g. Blocking access to certain file extensions, folders, verbs etc).
-- HTTP access logs aren’t collected.
+- Proper [HTTP access logs](https://stackoverflow.com/questions/47503120/log-client-ip-for-each-request-access-log-for-kestrel) aren’t collected. CLF not supported [till version 6](https://github.com/dotnet/aspnetcore/issues/5894)
 - Multiple apps on the same port.
+- HTTP/2 not supported on macOS
+- Response caching
+- Windows authentication (possible with IIS, Apache and Nginx)
+- Kestrel server doesn't currently offer [built-in compression support](https://learn.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-6.0)
 
 More reading to help you decide:
 
+- [HTTP.sys has more features](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/?view=aspnetcore-6.0&tabs=linux#httpsys)
 - [IIS and Kestrel feature comparison](https://stackify.com/kestrel-web-server-asp-net-core-kestrel-vs-iis/)
 - [When to use Kestrel with a reverse proxy](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/when-to-use-a-reverse-proxy?view=aspnetcore-6.0)
 - [Configure ASP.NET Core to work with proxy servers and load balancers](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-6.0)
@@ -91,6 +96,8 @@ https://www.haproxy.org/
 |--------------------------------------------------------------------------|---------------------------|
 | Purpose built, *very fast*, popular. Basic reporting UI. Fault tolerant. | Odd configuration. Dated. |
 
+([Microsoft sample config link](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-6.0#configure-apache))
+
 ---
 
 ### Nginx
@@ -100,6 +107,8 @@ https://www.nginx.com/
 | Pros                  | Cons                                                 |
 |-----------------------|------------------------------------------------------|
 | Fast, popular, simple | Free vs Paid version, not GUI and not purpose built. |
+
+([Microsoft sample config link](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-6.0&tabs=linux-ubuntu#configure-nginx))
 
 ---
 
