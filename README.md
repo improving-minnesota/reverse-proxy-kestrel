@@ -20,7 +20,7 @@ As Kestrel is maturing, Microsoft has evidently removed most of their own cautio
 server. Compare this [quoted answer](https://stackoverflow.com/a/43239677) on StackOverflow, with the link that
 references it. That text is no longer there, it changed [here, on 06/01/2019](https://github.com/dotnet/AspNetCore.Docs/commit/58fa78efdf080baf55072b5e6f7a03526890fd8a)!
 
-The danger here is that Microsoft does not specify when it became safe to use Kestrel without a proxy server! They just
+The danger here is that Microsoft does not specify when it became safe to use Kestrel without a proxy server! They're just
 making it seem as if it was always safe, even though, before they said it wasn't.
 
 ---
