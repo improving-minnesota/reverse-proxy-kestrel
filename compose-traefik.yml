@@ -5,7 +5,7 @@ networks:
 services:
 
   proxy:
-    container_name: dev13_traefik
+    container_name: traefik
     networks:
       - demo-proxy
 
