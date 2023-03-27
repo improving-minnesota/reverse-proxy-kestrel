@@ -18,7 +18,7 @@ entryPoints:
 
 http:
   routers:
-    odoo:
+    demp_app_router:
       rule: "Host(`localhost`)"
       service: "demo_app"
 

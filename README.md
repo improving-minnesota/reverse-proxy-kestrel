@@ -65,6 +65,10 @@ examples are for the following types `apache`, `haproxy`, `nginx`, `traefik` usi
 For example: `docker compose -f ./compose-apache.yml up`  
 ... and to bring it down: `docker compose -f ./compose-apache.yml down`
 
+For each stack, you can access the app @ `http://localhost:88/hello` EXCEPT FOR `haproxy`, which publishes the app
+at `https://localhost/hello`. The haproxy config is a basic setup for use with CertBot, which you can use to get
+a valid cert. (See https://github.com/nmarus/docker-haproxy-certbot)
+
 ---
 
 ## Pros and Cons
