@@ -1,6 +1,6 @@
 version: '3'
 networks:
-  net-sslproxy:
+  demo-proxy:
 
 services:
 
@@ -10,7 +10,7 @@ services:
     cap_add:
       - NET_ADMIN
     networks:
-      - net-sslproxy
+      - demo-proxy
     volumes:
       - ./example-haproxy.cfg:/config/haproxy.cfg:ro
       # These settings can be used when one is ready to configure a more permanent deployment
@@ -29,7 +29,7 @@ services:
       - proxy
     image: "demo"
     networks:
-      - net-sslproxy
+      - demo-proxy
 #    volumes:
 #      - ./app:/app:ro
     ports:

@@ -1,0 +1,30 @@
+version: '3'
+networks:
+  demo-proxy:
+
+services:
+
+  proxy:
+    image: "httpd:2.4"
+    container_name: apache
+    networks:
+      - demo-proxy
+    volumes:
+      - ./example-apache.cfg:/usr/local/apache2/conf/httpd.conf:ro
+    ports:
+      - 88:80
+
+
+  demo_app:
+    container_name: demo_app  # don't use a dash because this becomes the host name
+    depends_on:
+      - proxy
+    image: "demo"
+    networks:
+      - demo-proxy
+#    volumes:
+#      - ./app:/app:ro
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
