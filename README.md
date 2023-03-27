@@ -16,6 +16,13 @@ along with a reverse proxy. Understandably so, since Kestrel was specifically de
 It's no longer necessarily the case that Microsoft advises against using Kestrel directly exposed to the Internet,
 however, there are still reasons you may want to use Kestrel behind a reverse proxy.
 
+As Kestrel is maturing, Microsoft has evidently removed most of their own cautions regarding using Kestrel as an edge
+server. Compare this [quoted answer](https://stackoverflow.com/a/43239677) on StackOverflow, with the link that
+references it. That text is no longer there, it changed [here, on 06/01/2019](https://github.com/dotnet/AspNetCore.Docs/commit/58fa78efdf080baf55072b5e6f7a03526890fd8a)!
+
+The danger here is that Microsoft does not specify when it became safe to use Kestrel without a proxy server! They just
+making it seem as if it was always safe, even though, before they said it wasn't.
+
 ---
 
 ## Why use a reverse proxy instead of just Kestrel?
@@ -71,8 +78,11 @@ For example: `docker compose -f ./compose-apache.yml up`
 ... and to bring it down: `docker compose -f ./compose-apache.yml down`
 
 For each stack, you can access the app @ `http://localhost:88/hello` EXCEPT FOR `haproxy`, which publishes the app
-at `https://localhost/hello`. The haproxy config is a basic setup for use with CertBot, which you can use to get
-a valid cert. (See https://github.com/nmarus/docker-haproxy-certbot)
+at `https://localhost/hello`. The haproxy config is a basic setup for use with [CertBot](https://certbot.eff.org/),
+which you can use to get a valid HTTPS cert for free. (See https://github.com/nmarus/docker-haproxy-certbot).
+
+Additionally `haproxy` has a stats page at http://localhost:88/stats (login = admin/admin) and Traefik as a dashboard
+at http://localhost:8080 (no password, so this should be kept internal-only)
 
 ---
 
@@ -82,9 +92,11 @@ a valid cert. (See https://github.com/nmarus/docker-haproxy-certbot)
 
 https://httpd.apache.org/
 
-| Pros                                                              | Cons                                      |
-|-------------------------------------------------------------------|-------------------------------------------|
-| Popular, proven, well documented and supported. Lots of features. | Complex configuration; not purpose built. |
+| Pros                                                              | Cons                   |
+|-------------------------------------------------------------------|------------------------|
+| Popular, proven, well documented and supported. Lots of features. | Complex configuration. |
+
+([Microsoft sample config link](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-6.0#configure-apache))
 
 ---
 
@@ -92,11 +104,9 @@ https://httpd.apache.org/
 
 https://www.haproxy.org/
 
-| Pros                                                                     | Cons                      |
-|--------------------------------------------------------------------------|---------------------------|
-| Purpose built, *very fast*, popular. Basic reporting UI. Fault tolerant. | Odd configuration. Dated. |
-
-([Microsoft sample config link](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-apache?view=aspnetcore-6.0#configure-apache))
+| Pros                                                                           | Cons   |
+|--------------------------------------------------------------------------------|--------|
+| Purpose built, *very fast*, popular. Basic reporting UI. Fault tolerant. Free. | Dated. |
 
 ---
 
@@ -116,9 +126,9 @@ https://www.nginx.com/
 
 https://traefik.io/traefik/
 
-| Pros                                                             | Cons                          |
-|------------------------------------------------------------------|-------------------------------|
-| Fast, simple, modern, purpose built, built-in GUI, "rising star" | None that I've seen (so far). |
+| Pros                                                             | Cons                                         |
+|------------------------------------------------------------------|----------------------------------------------|
+| Fast, simple, modern, purpose built, built-in GUI, "rising star" | Free vs paid features; monetization squeeze. |
 
 
 ---
