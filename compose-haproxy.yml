@@ -12,7 +12,7 @@ services:
     networks:
       - net-sslproxy
     volumes:
-      - ./haproxy.cfg.example:/config/haproxy.cfg:ro
+      - ./example-haproxy.cfg:/config/haproxy.cfg:ro
       # These settings can be used when one is ready to configure a more permanent deployment
 #      - /etc/docker/haproxy/letsencrypt/:/etc/letsencrypt
 #      - /etc/docker/haproxy/certs.d/:/usr/local/etc/haproxy/certs.d

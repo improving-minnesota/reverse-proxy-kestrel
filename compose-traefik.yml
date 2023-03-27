@@ -1,0 +1,41 @@
+version: '3'
+networks:
+  demo-proxy:
+
+services:
+
+  proxy:
+    container_name: dev13_traefik
+    networks:
+      - demo-proxy
+
+    # The official v2 Traefik docker image
+    image: traefik:v2.2
+    # Enables the web UI and tells Traefik to listen to docker
+    command: --providers.file
+    ports:
+      # The HTTP port
+      - "88:80"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
+    expose: ["80"]
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      # config file used for traefik
+      - ./example-traefik.yml:/etc/traefik/traefik.yml:ro
+
+
+  demo_app:
+    container_name: demo_app  # don't use a dash because this becomes the host name
+    depends_on:
+      - proxy
+    image: "demo"
+    networks:
+      - demo-proxy
+    #    volumes:
+    #      - ./app:/app:ro
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

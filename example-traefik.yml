@@ -1,0 +1,29 @@
+api:
+  insecure: true
+  dashboard: true
+
+providers:
+  file:
+    directory: "/etc/traefik/"
+    watch: true
+
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: ":80"
+  traefik:
+    address: ":8080"
+
+http:
+  routers:
+    odoo:
+      rule: "Host(`localhost`)"
+      service: "demo_app"
+
+  services:
+    demo_app:
+      loadBalancer:
+        servers:
+          - url: "http://demo_app:5000"
