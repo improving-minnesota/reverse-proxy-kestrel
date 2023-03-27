@@ -2,16 +2,16 @@
 
 Sample reverse-proxy setups for use with a Kestrel app.
 
-Why did I develop this project? There seems to be a few claims* on the web that say Microsoft recommends using Kestrel
+Why did I develop this project? There seems to be a few claims** on the web that say Microsoft recommends using Kestrel
 along with a reverse proxy. Understandably so, since Kestrel was specifically designed to be lightweight.
 
-* some examples:
-- [Oreilly.com](https://www.oreilly.com/library/view/mastering-aspnet-web/9781786463951/5984f119-6ac4-4316-a5ec-5ad9587f6760.xhtml)
-- [Linode.com](https://www.linode.com/docs/guides/tutorial-host-asp-net-core-on-linux/#deploy-your-application-with-nginx)
-- [Tutorialspoint.com](https://www.tutorialspoint.com/what-is-kestrel-and-how-does-it-differ-from-iis-asp-net)
-- [DotcoreTutorials.com](https://dotnetcoretutorials.com/2019/12/25/kestrel-vs-iis/)
-- Point # 16 here: [Interviewbit.com](https://www.interviewbit.com/asp-net-interview-questions/#:~:text=Though%20Kestrel%20can%20serve%20an,performance%2C%20security%2C%20and%20reliability.)
-- [partech.nl](https://www.partech.nl/en/publications/2021/10/kestrel-vs-iis-web-servers#)
+** some examples:
+  - [Oreilly.com](https://www.oreilly.com/library/view/mastering-aspnet-web/9781786463951/5984f119-6ac4-4316-a5ec-5ad9587f6760.xhtml)
+  - [Linode.com](https://www.linode.com/docs/guides/tutorial-host-asp-net-core-on-linux/#deploy-your-application-with-nginx)
+  - [Tutorialspoint.com](https://www.tutorialspoint.com/what-is-kestrel-and-how-does-it-differ-from-iis-asp-net)
+  - [DotcoreTutorials.com](https://dotnetcoretutorials.com/2019/12/25/kestrel-vs-iis/)
+  - Point # 16 here: [Interviewbit.com](https://www.interviewbit.com/asp-net-interview-questions/#:~:text=Though%20Kestrel%20can%20serve%20an,performance%2C%20security%2C%20and%20reliability.)
+  - [partech.nl](https://www.partech.nl/en/publications/2021/10/kestrel-vs-iis-web-servers#)
 
 It's no longer necessarily the case that Microsoft advises against using Kestrel directly exposed to the Internet,
 however, there are still reasons you may want to use Kestrel behind a reverse proxy.
