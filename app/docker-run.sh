@@ -1,0 +1,1 @@
+docker run -it --rm -p5000:5000 demo

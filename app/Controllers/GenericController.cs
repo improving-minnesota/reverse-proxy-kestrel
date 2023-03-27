@@ -11,9 +11,15 @@ public class GenericController : ControllerBase
          _logger = logger;
      }
 
-    [HttpGet("hello")]
+    [HttpGet("/hello")]
     public String GetHello()
     {
         return "Hello World";
+    }
+
+    [HttpGet("/")]
+    public String GetAlive()
+    {
+        return "Alive!";
     }
 }
